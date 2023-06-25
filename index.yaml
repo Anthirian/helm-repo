@@ -33,6 +33,17 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/qbittorrent-0.1.0/qbittorrent-0.1.0.tgz
     version: 0.1.0
+  radarr:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-25T16:47:35.443371362Z"
+    description: A Helm chart for Kubernetes
+    digest: 9f333b121bc2ae588ffe69d03c6b78c4ab523fdcae5d4c5f9e783eba890d04e5
+    name: radarr
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/radarr-0.1.0/radarr-0.1.0.tgz
+    version: 0.1.0
   sonarr:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -74,4 +85,4 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-25T16:03:45.598448946Z"
+generated: "2023-06-25T16:47:35.443389262Z"
