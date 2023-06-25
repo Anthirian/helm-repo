@@ -25,6 +25,16 @@ entries:
   sonarr:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-06-25T14:19:02.221338625Z"
+    description: A Helm chart for Kubernetes
+    digest: 23dcb44e8ada957ca7cd75798770198cdbfb6a9d55e0ebf887b9044b05b04b77
+    name: sonarr
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.1/sonarr-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-06-25T14:00:19.744507644Z"
     description: A Helm chart for Kubernetes
     digest: d5ddcb40b4c2a2f8a4abc85526ca112e5c3a11012a9ff48de9f6d4cd7f0c875a
@@ -33,4 +43,4 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-25T14:00:19.744512244Z"
+generated: "2023-06-25T14:19:02.221345825Z"
