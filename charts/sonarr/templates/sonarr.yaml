@@ -1,0 +1,169 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+  name: sonarr
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - image: linuxserver/sonarr:latest
+          name: sonarr
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: UMASK_SET
+              value: "022"
+          volumeMounts:
+            #- mountPath: /config/custom-cont-init.d
+            #  name: update-sonarr-basepath
+            - mountPath: "/config"
+              name: sonarr-data
+              #subPath: "sonarr"
+              #subPath: "sonarr/config.xml"
+            - mountPath: "/downloads"
+              name: downloads
+          # resources:
+          #   limits:
+          #     memory: "64Mi"
+          #     cpu: "250m"
+      volumes:
+        - name: sonarr-data
+          persistentVolumeClaim:
+            claimName: sonarr-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: sonarr-downloads
+            #readOnly: true
+        #- name: update-sonarr-basepath
+        #  configMap:
+        #    name: update-sonarr-basepath
+      restartPolicy: Always
+      securityContext: {}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-downloads
+  labels:
+    type: local
+spec:
+  storageClassName: "" # force blank
+  capacity:
+    storage: 2Ti
+  accessModes:
+    - ReadWriteOnce
+    #- ReadWriteMany
+    #- ReadOnlyMany
+  hostPath:
+    path: "/mnt/data1"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-downloads
+spec:
+  storageClassName: "" # force blank
+  volumeName: sonarr-downloads
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 2Ti
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: k3d-storage-sonarr
+  labels:
+    type: local
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  hostPath:
+    path: "/srv/k3d/sonarr"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-config
+spec:
+  storageClassName: ""
+  volumeName: k3d-storage-sonarr
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+  namespace: default
+spec:
+  type: ClusterIP
+  selector:
+    app: sonarr
+  ports:
+    - port: 80
+      name: http
+      targetPort: 8989
+---
+# dashboard.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonarr-inbound
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sme.lt`) && PathPrefix(`/sonarr`)
+      kind: Rule
+      middlewares: []
+      #  - name: strip-prefix-sonarr
+      #    namespace: default
+      services:
+        - name: sonarr
+          kind: Service
+          namespace: default
+          port: 80
+  tls:
+    secretName: sme-lt-tls
+#   certResolver: gandi
+#   domains:
+#     - main: sme.lt
+---
+# Strip prefix /sonarr
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-prefix-sonarr
+spec:
+  stripPrefix:
+    prefixes:
+      - /sonarr
