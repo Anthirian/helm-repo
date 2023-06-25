@@ -11,4 +11,15 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/helm-example-0.1.0/helm-example-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-25T12:26:24.744093031Z"
+  nzbget:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-25T13:15:01.156617262Z"
+    description: A Helm chart for Kubernetes
+    digest: 9049d0b843ac41915017c26a49a1eb4a74c420cf99387910a03d7fc097d1da22
+    name: nzbget
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/nzbget-0.1.0/nzbget-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-06-25T13:15:01.156628662Z"
