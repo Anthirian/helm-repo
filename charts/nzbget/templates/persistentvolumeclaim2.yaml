@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nzbget-config
+spec:
+  storageClassName: ""
+  volumeName: k3d-storage-nzbget
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 128Mi

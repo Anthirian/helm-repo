@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nzbget-downloads
+spec:
+  storageClassName: "" # force blank
+  volumeName: nzbget-downloads
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti

@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nzbget
+  name: nzbget
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nzbget
+  template:
+    metadata:
+      labels:
+        app: nzbget
+    spec:
+      containers:
+        - image: linuxserver/nzbget:latest
+          name: nzbget
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+#           - name: UMASK_SET
+#             value: "022"
+          volumeMounts:
+            - mountPath: "/config"
+              name: nzbget-data
+            - mountPath: "/downloads"
+              name: downloads
+          # resources:
+          #   limits:
+          #     memory: "64Mi"
+          #     cpu: "250m"
+      volumes:
+        - name: nzbget-data
+          persistentVolumeClaim:
+            claimName: nzbget-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: nzbget-downloads
+            #readOnly: true
+      restartPolicy: Always
+      securityContext: {}

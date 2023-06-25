@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: nzbget-inbound
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sme.lt`) && PathPrefix(`/nzbget`)
+      kind: Rule
+      middlewares: []
+      services:
+        - name: nzbget
+          kind: Service
+          namespace: default
+          port: 80
+  tls:
+    secretName: sme-lt-tls
