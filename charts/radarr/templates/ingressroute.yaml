@@ -1,0 +1,22 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: radarr-inbound
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sme.lt`) && PathPrefix(`/radarr`)
+      kind: Rule
+      middlewares: []
+      services:
+        - name: radarr
+          kind: Service
+          namespace: default
+          port: 80
+  tls:
+    secretName: sme-lt-tls
+#   certResolver: gandi
+#   domains:
+#   - main: sme.lt

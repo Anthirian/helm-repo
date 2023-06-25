@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-config
+spec:
+  storageClassName: local-path
+  volumeName: k3d-storage-radarr
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 128Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: radarr-downloads
+spec:
+  storageClassName: local-path
+  volumeName: radarr-downloads
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 1Ti

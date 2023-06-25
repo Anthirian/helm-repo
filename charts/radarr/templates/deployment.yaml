@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: radarr
+  name: radarr
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+        - image: linuxserver/radarr:latest
+          name: radarr
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: UMASK_SET
+              value: "022"
+          volumeMounts:
+            - mountPath: "/config"
+              name: radarr-data
+            - mountPath: "/downloads"
+              name: downloads
+          # resources:
+          #   limits:
+          #     memory: "64Mi"
+          #     cpu: "250m"
+      volumes:
+        - name: radarr-data
+          persistentVolumeClaim:
+            claimName: radarr-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: radarr-downloads
+            #readOnly: true
+      securityContext: {}
