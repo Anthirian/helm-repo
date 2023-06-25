@@ -4,7 +4,7 @@ kind: PersistentVolumeClaim
 metadata:
   name: sonarr-downloads
 spec:
-  storageClassName: "" # force blank
+  storageClassName: local-path
   volumeName: sonarr-downloads
   accessModes:
     - ReadWriteOnce
@@ -13,3 +13,18 @@ spec:
   resources:
     requests:
       storage: 2Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sonarr-config
+spec:
+  storageClassName: local-path
+  volumeName: k3d-storage-sonarr
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 128Mi
