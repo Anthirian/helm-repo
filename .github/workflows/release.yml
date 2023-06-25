@@ -1,5 +1,5 @@
-name: Release Charts
-run-name: ${{ github.actor }} is testing out Helm Chart Releaser 🚀
+name: Helm Chart Releaser
+run-name: Helm Chart Releaser
 on:
   push:
     branches:
