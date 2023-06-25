@@ -22,4 +22,15 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/nzbget-0.1.0/nzbget-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-25T13:15:01.156628662Z"
+  sonarr:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-25T14:00:19.744507644Z"
+    description: A Helm chart for Kubernetes
+    digest: d5ddcb40b4c2a2f8a4abc85526ca112e5c3a11012a9ff48de9f6d4cd7f0c875a
+    name: sonarr
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
+    version: 0.1.0
+generated: "2023-06-25T14:00:19.744512244Z"
