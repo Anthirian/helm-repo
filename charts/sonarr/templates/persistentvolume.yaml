@@ -6,7 +6,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: "" # force blank
+  storageClassName: local-path
   capacity:
     storage: 2Ti
   accessModes:
