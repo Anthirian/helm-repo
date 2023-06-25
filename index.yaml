@@ -22,6 +22,17 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/nzbget-0.1.0/nzbget-0.1.0.tgz
     version: 0.1.0
+  qbittorrent:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-25T16:03:45.598437545Z"
+    description: A Helm chart for Kubernetes
+    digest: 08bcc7c25f072532563dbcdbc106496482c2510d59f89ba192d057bc2304660e
+    name: qbittorrent
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/qbittorrent-0.1.0/qbittorrent-0.1.0.tgz
+    version: 0.1.0
   sonarr:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -63,4 +74,4 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-25T14:30:38.997341465Z"
+generated: "2023-06-25T16:03:45.598448946Z"
