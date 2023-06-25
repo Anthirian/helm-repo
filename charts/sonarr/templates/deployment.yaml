@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: sonarr
+  name: sonarr
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+        - image: linuxserver/sonarr:latest
+          name: sonarr
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: UMASK_SET
+              value: "022"
+          volumeMounts:
+            #- mountPath: /config/custom-cont-init.d
+            #  name: update-sonarr-basepath
+            - mountPath: "/config"
+              name: sonarr-data
+              #subPath: "sonarr"
+              #subPath: "sonarr/config.xml"
+            - mountPath: "/downloads"
+              name: downloads
+          # resources:
+          #   limits:
+          #     memory: "64Mi"
+          #     cpu: "250m"
+      volumes:
+        - name: sonarr-data
+          persistentVolumeClaim:
+            claimName: sonarr-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: sonarr-downloads
+            #readOnly: true
+        #- name: update-sonarr-basepath
+        #  configMap:
+        #    name: update-sonarr-basepath
+      restartPolicy: Always
+      securityContext: {}

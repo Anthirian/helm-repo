@@ -1,0 +1,17 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarr-downloads
+  labels:
+    type: local
+spec:
+  storageClassName: "" # force blank
+  capacity:
+    storage: 2Ti
+  accessModes:
+    - ReadWriteOnce
+    #- ReadWriteMany
+    #- ReadOnlyMany
+  hostPath:
+    path: "/mnt/data1"

@@ -1,0 +1,25 @@
+---
+# dashboard.yaml
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: sonarr-inbound
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sme.lt`) && PathPrefix(`/sonarr`)
+      kind: Rule
+      middlewares: []
+      #  - name: strip-prefix-sonarr
+      #    namespace: default
+      services:
+        - name: sonarr
+          kind: Service
+          namespace: default
+          port: 80
+  tls:
+    secretName: sme-lt-tls
+#   certResolver: gandi
+#   domains:
+#     - main: sme.lt
