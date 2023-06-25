@@ -1,0 +1,30 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-downloads
+spec:
+  storageClassName: local-path
+  volumeName: qbittorrent-downloads
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 2Ti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: qbittorrent-config
+spec:
+  storageClassName: local-path
+  volumeName: k3d-storage-qbittorrent
+  accessModes:
+    - ReadWriteOnce
+    #- ReadOnlyMany
+    #- ReadWriteMany
+  resources:
+    requests:
+      storage: 128Mi

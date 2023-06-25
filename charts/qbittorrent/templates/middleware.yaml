@@ -1,0 +1,11 @@
+---
+# Strip prefix /qbittorrent
+# https://community.traefik.io/t/cannot-reacreate-nginx-proxy-pass-behavior-with-traefik/4527
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: strip-prefix-qbittorrent
+spec:
+  stripPrefix:
+    prefixes:
+      - /qbittorrent

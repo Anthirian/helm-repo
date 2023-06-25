@@ -1,0 +1,24 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: qbittorrent-inbound
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sme.lt`) && PathPrefix(`/qbittorrent`)
+      kind: Rule
+      middlewares:
+        - name: strip-prefix-qbittorrent
+          namespace: default
+      services:
+        - name: qbittorrent
+          kind: Service
+          namespace: default
+          port: 80
+  tls:
+    secretName: sme-lt-tls
+#   certResolver: gandi
+#   domains:
+#   - main: sme.lt

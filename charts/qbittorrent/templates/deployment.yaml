@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: qbittorrent
+  name: qbittorrent
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+        - image: linuxserver/qbittorrent:latest
+          name: qbittorrent
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+            - name: WEBUI_PORT
+              value: "8000"
+          volumeMounts:
+            - mountPath: "/config"
+              name: qbittorrent-data
+            - mountPath: "/downloads"
+              name: downloads
+          # resources:
+          #   limits:
+          #     memory: "64Mi"
+          #     cpu: "250m"
+      volumes:
+        - name: qbittorrent-data
+          persistentVolumeClaim:
+            claimName: qbittorrent-config
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: qbittorrent-downloads
+            #readOnly: true
+      restartPolicy: Always
+      securityContext: {}
