@@ -1,0 +1,19 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jackett-inbound
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`sme.lt`) && PathPrefix(`/jackett`)
+      kind: Rule
+      middlewares: []
+      services:
+        - name: jackett
+          kind: Service
+          namespace: default
+          port: 80
+  tls:
+    secretName: sme-lt-tls

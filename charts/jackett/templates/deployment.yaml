@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jackett
+  name: jackett
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jackett
+  template:
+    metadata:
+      labels:
+        app: jackett
+    spec:
+      containers:
+        - image: linuxserver/jackett:latest
+          name: jackett
+          env:
+            - name: TZ
+              value: "Europe/Amsterdam"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            - mountPath: "/config"
+              name: jackett-data
+          # resources:
+          #   limits:
+          #     memory: "64Mi"
+          #     cpu: "250m"
+      volumes:
+        - name: jackett-data
+          persistentVolumeClaim:
+            claimName: jackett-config
+      securityContext: {}
