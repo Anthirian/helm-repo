@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  jackett:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-26T20:43:15.022956917Z"
+    description: A Helm chart for Kubernetes
+    digest: 581d0cf74269e70de6823d493287f8d6bcdd9852415f54218f6707bd5f6d49c8
+    name: jackett
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/jackett-0.1.0/jackett-0.1.0.tgz
+    version: 0.1.0
   nzbget:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -74,4 +85,4 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-25T16:48:35.443389262Z"
+generated: "2023-06-26T20:43:15.022968717Z"
