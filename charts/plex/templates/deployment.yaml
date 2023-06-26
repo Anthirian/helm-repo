@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: plex
+  name: plex
+  namespace: plex
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: plex
+  template:
+    metadata:
+      labels:
+        app: plex
+    spec:
+      containers:
+      - image: plexinc/pms-docker
+        imagePullPolicy: Always
+        name: pms-docker
+        env:
+          - name: TZ
+            value: Europe/Amsterdam
+          - name: PLEX_CLAIM
+            value: claim-MpwA9wRTUws7mdCX6U_t
+          - name: ADVERTISE_IP
+            value: http://192.168.0.7:32400/
+        volumeMounts:
+          - mountPath: "/downloads"
+            name: video-collection
+      restartPolicy: Always
+      volumes:
+        - name: video-collection
+          persistentVolumeClaim:
+            claimName: video-collection
+            readOnly: true
