@@ -22,6 +22,17 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/nzbget-0.1.0/nzbget-0.1.0.tgz
     version: 0.1.0
+  plex:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-06-26T20:50:17.628592955Z"
+    description: A Helm chart for Kubernetes
+    digest: a3054bb2d67250dbbf1266467787d9c563054fc58deeb3b227f3548b152dafb0
+    name: plex
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/plex-0.1.0/plex-0.1.0.tgz
+    version: 0.1.0
   qbittorrent:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -85,4 +96,4 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-26T20:43:15.022968717Z"
+generated: "2023-06-26T20:50:17.628602755Z"
