@@ -4,20 +4,30 @@ kind: Deployment
 metadata:
   labels:
     app: nzbget
-  name: nzbget
+  name: {{ include "nzbget.fullname" . }}
   namespace: default
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: nzbget
+      {{- include "nzbget.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app: nzbget
+        {{- include "nzbget.selectorLabels" . | nindent 8 }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - image: linuxserver/nzbget:latest
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           name: nzbget
           env:
             - name: TZ
@@ -33,6 +43,9 @@ spec:
               name: nzbget-data
             - mountPath: "/downloads"
               name: downloads
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
           # resources:
           #   limits:
           #     memory: "64Mi"
