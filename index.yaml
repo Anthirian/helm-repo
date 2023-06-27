@@ -23,6 +23,18 @@ entries:
     version: 0.1.0
   nzbget:
   - apiVersion: v2
+    created: "2023-06-27T21:02:26.129526602Z"
+    description: Efficient Usenet downloader
+    digest: b252b035f7eeddaff052650bd72ef714a43da29148c92b6b951b06656064ce02
+    home: https://nzbget.net/
+    name: nzbget
+    sources:
+    - https://github.com/nzbget/nzbget
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/nzbget-0.1.1/nzbget-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-06-25T13:15:01.156617262Z"
     description: A Helm chart for Kubernetes
@@ -126,4 +138,4 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-27T09:45:11.354713332Z"
+generated: "2023-06-27T21:02:26.129543202Z"
