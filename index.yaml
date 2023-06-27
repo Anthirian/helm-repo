@@ -57,6 +57,16 @@ entries:
   radarr:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-06-27T09:42:57.155217563Z"
+    description: A Helm chart for Kubernetes
+    digest: 87a22420f2434ce6b3f116c9778c33056b72475c14e1a3f2d030e238a713e94a
+    name: radarr
+    type: application
+    urls:
+    - https://github.com/Anthirian/helm-repo/releases/download/radarr-0.1.1/radarr-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-06-25T16:47:35.443371362Z"
     description: A Helm chart for Kubernetes
     digest: 9f333b121bc2ae588ffe69d03c6b78c4ab523fdcae5d4c5f9e783eba890d04e5
@@ -106,4 +116,4 @@ entries:
     urls:
     - https://github.com/Anthirian/helm-repo/releases/download/sonarr-0.1.0/sonarr-0.1.0.tgz
     version: 0.1.0
-generated: "2023-06-27T09:41:45.918704587Z"
+generated: "2023-06-27T09:42:57.155252163Z"
